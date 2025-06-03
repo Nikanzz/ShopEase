@@ -60,6 +60,6 @@ php artisan db:seed
 ### 6. Run the Application
 
 ```bash
-npm run dev
+npm run build
 php artisan serve
 ```
