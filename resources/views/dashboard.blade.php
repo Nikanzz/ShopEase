@@ -15,6 +15,11 @@
         <li>Email: {{ Auth::user()->email }}</li>
     </ul>
 
+    <form method="GET" action="{{ route('purchase.history') }}">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
+
     <form method="POST" action="{{ route('logout') }}">
         @csrf
         <button type="submit">Logout</button>

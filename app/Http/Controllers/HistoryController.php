@@ -3,8 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class HistoryController extends Controller
 {
-    //
+    //GET history
+    public function showPurchaseHistory(Request $request){
+        $name = Auth::user()->name;
+        $id = Auth::user()->id;
+        $history = DB::table('histories')->orderBy('bought_at' , 'asc')->where('user_id' , $id)->get();
+        
+
+        foreach($history as $h){
+            $h->item = DB::table('products')->where('id' , $h->item_id)->first();
+        }
+        return view('history')->with('history',$history);
+    }
 }
