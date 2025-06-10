@@ -6,6 +6,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\SellerController;
+use App\Http\Controllers\ProductController;
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
@@ -22,6 +24,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/history' , [HistoryController::class , 'showPurchaseHistory'])->name('purchase.history');
+    Route::get('/createProduct' , [ProductController::class , 'redirectCreateProduct'])->name('create.product');
+    Route::post('/createProductProcess' , [ProductController::class , 'createProduct'])->name('new.product');
+    Route::get('/products' , [ProductController::class , 'showProducts'])->name('product.list');
+    Route::post('/becomeseller' , [SellerController::class , 'becomeSeller'])->name('become.seller');
+    Route::post('/sellerregister' , [SellerController::class , 'createNewSeller'])->name('register.seller');
 });
 
 Route::get('/', function () {
