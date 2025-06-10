@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/history' , [HistoryController::class , 'showPurchaseHistory'])->name('purchase.history');
     Route::get('/createProduct' , [ProductController::class , 'redirectCreateProduct'])->name('create.product');
+    Route::post('/createProductProcess' , [ProductController::class , 'createProduct'])->name('new.product');
     Route::get('/products' , [ProductController::class , 'showProducts'])->name('product.list');
     Route::post('/becomeseller' , [SellerController::class , 'becomeSeller'])->name('become.seller');
     Route::post('/sellerregister' , [SellerController::class , 'createNewSeller'])->name('register.seller');
