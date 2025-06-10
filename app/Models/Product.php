@@ -26,4 +26,13 @@ class Product extends Model
     public function category() {
         return $this->belongsTo(Category::class);
     }
+    
+    public function reviews() {
+        return $this->hasMany(Review::class);
+    }
+
+    public function orderItems() {
+        return $this->hasMany(OrderItem::class);
+    }
+    
 }
