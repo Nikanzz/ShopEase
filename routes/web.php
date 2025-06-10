@@ -5,6 +5,10 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\SellerController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
@@ -20,6 +24,16 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/history' , [HistoryController::class , 'showPurchaseHistory'])->name('purchase.history');
+    Route::get('/createProduct' , [ProductController::class , 'redirectCreateProduct'])->name('create.product');
+    Route::post('/createProductProcess' , [ProductController::class , 'createProduct'])->name('new.product');
+    Route::get('/products' , [ProductController::class , 'showProducts'])->name('product.list');
+    Route::post('/becomeseller' , [SellerController::class , 'becomeSeller'])->name('become.seller');
+    Route::post('/sellerregister' , [SellerController::class , 'createNewSeller'])->name('register.seller');
+    Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
+    Route::get('/profile/edit', [ProfileController::class, 'showEditProfileForm'])->name('profile.edit');
+    Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::post('/profile/delete', [ProfileController::class, 'deleteProfile'])->name('profile.delete');
 });
 
 Route::get('/', function () {
