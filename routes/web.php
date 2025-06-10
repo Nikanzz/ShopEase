@@ -8,6 +8,7 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
@@ -29,6 +30,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/products' , [ProductController::class , 'showProducts'])->name('product.list');
     Route::post('/becomeseller' , [SellerController::class , 'becomeSeller'])->name('become.seller');
     Route::post('/sellerregister' , [SellerController::class , 'createNewSeller'])->name('register.seller');
+    Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
+    Route::get('/profile/edit', [ProfileController::class, 'showEditProfileForm'])->name('profile.edit');
+    Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::post('/profile/delete', [ProfileController::class, 'deleteProfile'])->name('profile.delete');
 });
 
 Route::get('/', function () {
