@@ -14,6 +14,11 @@
         <li>Name: {{ Auth::user()->name }}</li>
         <li>Email: {{ Auth::user()->email }}</li>
     </ul>
+    <form method="GET" action="{{ route('profile') }}">
+        @csrf
+        <button type="submit">Profile</button>
+    </form>
+    <br>
 
     <form method="GET" action="{{ route('purchase.history') }}">
         @csrf
