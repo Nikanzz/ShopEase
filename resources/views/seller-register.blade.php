@@ -7,7 +7,7 @@
     <title>Register Seller</title>
 </head>
 <body>
-    <h1>Input your shopName</h1>
+    <h1>Input your shop name</h1>
     <form method="POST" action="{{ route('register.seller') }}">
         @csrf
         <label for="name">Shop name:</label>

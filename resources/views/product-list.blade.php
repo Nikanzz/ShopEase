@@ -13,7 +13,7 @@
         <button type="submit">Back to DashBoard</button>
     </form>
     <br>
-    <form method="GET" action="{{ route('dashboard') }}">
+    <form method="GET" action="{{ route('create.product') }}">
         @csrf
         <button type="submit">Create Product</button>
     </form>
