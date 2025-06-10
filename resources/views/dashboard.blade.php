@@ -32,7 +32,7 @@
         <h1>You are a seller!</h1>
         <h2>Manage your shop: {{ DB::table('sellers')->where('user_id' , Auth::user()->id)->first()->shopname }}</h2>
         <br>
-        <form method="POST" action="{{ route('logout') }}">
+        <form method="GET" action="{{ route('product.list') }}">
             @csrf
             <button type="submit">Manage Products</button>
         </form>
