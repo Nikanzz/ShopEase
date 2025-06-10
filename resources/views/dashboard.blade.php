@@ -17,7 +17,7 @@
 
     <form method="GET" action="{{ route('purchase.history') }}">
         @csrf
-        <button type="submit">Logout</button>
+        <button type="submit">Riwayat</button>
     </form>
 
     <form method="POST" action="{{ route('logout') }}">
