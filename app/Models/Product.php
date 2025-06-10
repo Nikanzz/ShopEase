@@ -16,6 +16,7 @@ class Product extends Model
         'stock',
         'min_stock',
         'category_id',
+        'seller_id',
     ];
 
     protected $casts = [
@@ -25,5 +26,9 @@ class Product extends Model
 
     public function category() {
         return $this->belongsTo(Category::class);
+    }
+
+    public function seller(){
+        return $this->belongsTo(Seller::class);
     }
 }

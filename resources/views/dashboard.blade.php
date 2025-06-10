@@ -19,10 +19,42 @@
         @csrf
         <button type="submit">Riwayat</button>
     </form>
+    <br>
 
     <form method="POST" action="{{ route('logout') }}">
         @csrf
         <button type="submit">Logout</button>
     </form>
+    <br>
+    <br>
+
+    @if (DB::table('sellers')->where('user_id' , Auth::user()->id)->exists())
+        <h1>You are a seller!</h1>
+        <h2>Manage your shop: {{ DB::table('sellers')->where('user_id' , Auth::user()->id)->first()->shopname }}</h2>
+        <br>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit">Manage Products</button>
+        </form>
+        <br>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit">Manage orders</button>
+        </form>
+        <br>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit">Order history</button>
+        </form>
+        <br>
+    @else
+        <h1>You are not a seller!</h1>
+        <br>
+        <form method="POST" action="{{ route('become.seller') }}">
+        @csrf
+            <button type="submit">Become a seller</button>
+        </form>
+    @endif
+    
 </body>
 </html>

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('shopname')->unique();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('profile_picture')->nullable();
             $table->timestamps();
         });
     }
