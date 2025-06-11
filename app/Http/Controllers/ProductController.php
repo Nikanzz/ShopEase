@@ -10,14 +10,20 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+    private function getProducts(Request $request){
+        $id = Auth::user()->id;
+        $seller = DB::table('sellers')->where('user_id' , $id)->first();
+        $sellerId = $seller->id;
+        $query = DB::table('products')->orderBy('id' , 'asc')->where('seller_id' , $sellerId);
+        $products = $query->get();
+        return $products;
+    }
+
     public function showProducts(Request $request){
         $id = Auth::user()->id;
         $seller = DB::table('sellers')->where('user_id' , $id)->first();
         if($seller){
-            $sellerId = $seller->id;
-            $query = DB::table('products')->orderBy('name' , 'asc')->where('seller_id' , $sellerId);
-            $products = $query->get();
-            return view('product-list')->with('products' , $products);
+            return view('product-list')->with('products' , ProductController::getProducts($request));
         }
         return redirect('/dashboard');
     }
@@ -48,8 +54,26 @@ class ProductController extends Controller
             'category_id' => $validated['categories'],
             'seller_id' => $sellerId,
         ]);
-        $query = DB::table('products')->orderBy('name' , 'asc')->where('seller_id' , $sellerId);
-        $products = $query->get();
-        return view('product-list')->with('products' , $products);
+
+        return redirect('/products')->with('products' , ProductController::getProducts($request));
     }
+
+    public function manageProductRedirect(Request $request , int $i){
+        $p = DB::table('products')->where('id' ,$i)->first();
+        return view('manage-product')->with('product' , $p);
+    }
+
+    public function changeProduct(Request $request){
+        $validated = $request->validate([
+            'id' => 'required',
+            'name' => "required|string|max:40",
+            'description' => "nullable|string",
+            'price' => 'required|decimal:0,4',
+            'stock' => 'required|integer',
+            'category_id' => 'required'
+        ]);
+        $product = DB::table('products')->where('id' , $request['id'])->update($validated);
+        return view('product-list')->with('products' , ProductController::getProducts($request));
+    }
+    
 }
