@@ -27,6 +27,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/history' , [HistoryController::class , 'showPurchaseHistory'])->name('purchase.history');
     Route::get('/createProduct' , [ProductController::class , 'redirectCreateProduct'])->name('create.product');
     Route::post('/createProductProcess' , [ProductController::class , 'createProduct'])->name('new.product');
+    Route::get('/manageProduct/{i}' , [ProductController::class , 'manageProductRedirect'])->name('manage.product');
+    Route::post('/changeProduct' , [ProductController::class , 'changeProduct'])->name('change.product');
+    Route::get('/deleteProduct/{product_id}' , [ProductController::class , 'deleteProduct'])->name('delete.product');
     Route::get('/products' , [ProductController::class , 'showProducts'])->name('product.list');
     Route::post('/becomeseller' , [SellerController::class , 'becomeSeller'])->name('become.seller');
     Route::post('/sellerregister' , [SellerController::class , 'createNewSeller'])->name('register.seller');

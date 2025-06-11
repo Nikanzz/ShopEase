@@ -16,7 +16,7 @@ class HistoryController extends Controller
         
 
         foreach($history as $h){
-            $h->item = DB::table('products')->where('id' , $h->item_id)->first();
+            $h->item = $h->product_name;
         }
         return view('history')->with('history',$history);
     }

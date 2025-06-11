@@ -28,6 +28,8 @@
           <th style="width: 120px">Price</th>
           <th style="width: 120px">Stock</th>
           <th style="width: 120px">Category</th>
+          <th style="width: 120px">Manage</th>
+          <th style="width: 120px; color:RED">Delete</th>
         </tr> 
       </thead> 
       <tbody> 
@@ -42,14 +44,24 @@
             <td> 
               {{$p->description}}
             </td> 
-            <td> 
+            <td>
               {{$p->price}}
             </td>
-            <td> 
+            <td>
               {{$p->stock}}
             </td>
             <td> 
               {{DB::table('categories')->where('id' , $p->category_id)->first()->name}}
+            </td>
+            <td>
+              <a href="{{route('manage.product' , $p->id)}}">
+              Change
+              </a>
+            </td>
+            <td>
+              <a href="{{route('delete.product' , $p->id)}}" style="color:RED">
+              Delete
+              </a>
             </td>
           </tr> 
         @endforeach 
