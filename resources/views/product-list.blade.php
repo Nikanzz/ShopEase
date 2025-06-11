@@ -29,6 +29,7 @@
           <th style="width: 120px">Stock</th>
           <th style="width: 120px">Category</th>
           <th style="width: 120px">Manage</th>
+          <th style="width: 120px; color:RED">Delete</th>
         </tr> 
       </thead> 
       <tbody> 
@@ -55,6 +56,11 @@
             <td>
               <a href="{{route('manage.product' , $p->id)}}">
               Change
+              </a>
+            </td>
+            <td>
+              <a href="{{route('delete.product' , $p->id)}}" style="color:RED">
+              Delete
               </a>
             </td>
           </tr> 

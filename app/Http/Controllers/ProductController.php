@@ -75,5 +75,16 @@ class ProductController extends Controller
         $product = DB::table('products')->where('id' , $request['id'])->update($validated);
         return view('product-list')->with('products' , ProductController::getProducts($request));
     }
+
+    public function deleteProduct(Request $request , int $product_id){
+        $sellerId = DB::table('sellers')->where('user_id' , Auth::user()->id)->firstorfail()->id;
+        $product = DB::table('products')->where('id' , $product_id);
+        if($sellerId == $product->firstorfail()->id){
+            $product->delete();
+            return redirect('/products')->with('products' , ProductController::getProducts($request));
+        } else {
+            return redirect('/');
+        }
+    }
     
 }

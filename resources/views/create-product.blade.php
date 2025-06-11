@@ -16,7 +16,7 @@
         <label for="price">Price</label>
         <input type="number" id="price" name="price"><br><br>
         <label for="stock">Stock</label>
-        <input type="text" id="stock" name="stock" maxlength="50"><br><br>
+        <input type="number" id="stock" name="stock"><br><br>
         <label for="categories">Category</label>
         <select name="categories" id="categories">
             @foreach(DB::table('categories')->get() as $category)
@@ -24,6 +24,11 @@
             @endforeach
         </select><br><br>
         <button type="submit">Submit</button>
+    </form>
+
+    <form method="GET" action="{{ route('product.list') }}">
+        @csrf
+        <br><br><button type="submit">Cancel</button>
     </form>
 </body>
 </html>
