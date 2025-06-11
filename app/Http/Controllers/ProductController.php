@@ -79,7 +79,7 @@ class ProductController extends Controller
     public function deleteProduct(Request $request , int $product_id){
         $sellerId = DB::table('sellers')->where('user_id' , Auth::user()->id)->firstorfail()->id;
         $product = DB::table('products')->where('id' , $product_id);
-        if($sellerId == $product->firstorfail()->id){
+        if($sellerId == $product->firstorfail()->seller_id){
             $product->delete();
             return redirect('/products')->with('products' , ProductController::getProducts($request));
         } else {

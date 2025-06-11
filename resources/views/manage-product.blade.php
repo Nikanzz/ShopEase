@@ -13,7 +13,7 @@
         <label for="name">Name</label>
         <input type="text" id="name" name="name" maxlength="50" value="{{$product->name}}"><br><br>
         <label for="description">Description</label>
-        <input type="text" id="description" name="description" value="{{$product->description}}"><br><br>
+        <textarea id="description" name="description">{{$product->description}}</textarea> <br><br>
         <label for="price">Price</label>
         <input type="number" id="price" name="price" value="{{$product->price}}"><br><br>
         <label for="stock">Stock</label>

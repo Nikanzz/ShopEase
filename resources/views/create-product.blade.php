@@ -12,7 +12,7 @@
         <label for="name">Name</label>
         <input type="text" id="name" name="name" maxlength="50" ><br><br>
         <label for="description">Description</label>
-        <input type="text" id="description" name="description"><br><br>
+        <textarea id="description" name="description"></textarea><br><br>
         <label for="price">Price</label>
         <input type="number" id="price" name="price"><br><br>
         <label for="stock">Stock</label>
