@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('profile_picture')->nullable();
             $table->decimal('balance', 10, 2)->default(0);
             $table->string('email')->unique();
+            $table->string('address')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('phone_verified_at')->nullable();
             $table->string('password');
