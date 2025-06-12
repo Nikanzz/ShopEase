@@ -9,6 +9,10 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductByCategoryController;
+use App\Http\Controllers\ProductDetailController;
+use App\Http\Controllers\StoreDetailController;
+use App\Http\Controllers\PurchaseController;
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
@@ -34,6 +38,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'showEditProfileForm'])->name('profile.edit');
     Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::post('/profile/delete', [ProfileController::class, 'deleteProfile'])->name('profile.delete');
+    Route::get('/category/{category}' , [ProductByCategoryController::class , 'showProductByCategory'])->name('product.category');
+    Route::get('/product/{product}' , [ProductDetailController::class , 'showProductDetail'])->name('product.detail');
+    Route::get('/store/{seller}' , [StoreDetailController::class , 'showStoreDetail'])->name('store.detail');
+    Route::get('/purchase/{product}' , [PurchaseController::class , 'Purchase'])->name('purchase');
 });
 
 Route::get('/', function () {

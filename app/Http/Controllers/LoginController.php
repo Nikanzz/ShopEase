@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -31,7 +31,8 @@ class LoginController extends Controller
     }
 
     public function dashboard() {
-        return view('dashboard');
+        $category = Category::all();
+        return view('dashboard', compact('category'));
     }
 
     public function logout(Request $request) {

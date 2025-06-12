@@ -13,6 +13,7 @@
     <ul>
         <li>Name: {{ Auth::user()->name }}</li>
         <li>Email: {{ Auth::user()->email }}</li>
+        <li>Saldo: {{ Auth::user()->balance }}</li>
     </ul>
     <form method="GET" action="{{ route('profile') }}">
         @csrf
@@ -61,5 +62,29 @@
         </form>
     @endif
     
+  <h2>Kategori Produk</h2>
+<table border="1" cellpadding="5" cellspacing="0"> 
+  <thead> 
+    
+  </thead> 
+  <tbody> 
+    @foreach($category as $categories) 
+      <tr> 
+
+      
+        <td>
+          {{Log::info($categories)}} 
+           <a href = "{{ route('product.category', $categories) }}"> 
+           {{$categories->name}} 
+            </a>
+        </td> 
+        
+
+  
+      </tr> 
+    @endforeach 
+  </tbody> 
+</table>
+
 </body>
 </html>
