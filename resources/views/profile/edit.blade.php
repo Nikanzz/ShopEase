@@ -26,6 +26,10 @@
         <input type="text" id="phone" name="phone" value="{{ Auth::user()->phone }}" required>
         <br>
 
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" value="{{ Auth::user()->address }}" required>
+        <br>
+        
         <button type="submit">Update Profile</button>
     </form>
 </body>
