@@ -1,14 +1,14 @@
-<h2> Pembelian produk </h2>
+<h2> Add to Cart </h2>
 
 Nama produk : {{ $product->name }}<br>
 Harga satuan : Rp{{ number_format($product->price, 0, ',', '.') }}<br>
 Nama toko : {{ $product->seller->shopname }}<br>
 Stok tersedia: {{ $product->stock }}<br><br>
 
-<!--form-->
-    <!--csrf-->
-
-    Jumlah yang ingin dibeli: 
+<form method="POST" action="{{route('add.to.cart')}}">
+    @csrf
+    <label for="quantity">Jumlah yang ingin dibeli: </label>
+    <input type="hidden" name="pid" value="{{$product->id}}">
     <input 
         type="number" 
         id="quantity" 
@@ -22,9 +22,10 @@ Stok tersedia: {{ $product->stock }}<br><br>
 
     Total harga: 
     <span id="total">Rp0</span><br><br>
+    <button type="submit">Masukkan</button>
+</form>
 
-    <button type="submit">BELI</button>
-<!--</form>-->
+<button type="button" onclick="history.back();">Kembali</button>
 
 <script>
     const price = {{ $product->price }};
@@ -33,12 +34,6 @@ Stok tersedia: {{ $product->stock }}<br><br>
     function updateTotal() {
         let quantityInput = document.getElementById('quantity');
         let quantity = parseInt(quantityInput.value);
-
-        // Batasi jumlah jika lebih dari stok
-        if (quantity > maxStock) {
-            quantity = maxStock;
-            quantityInput.value = maxStock;
-        }
 
         const total = price * quantity;
         document.getElementById('total').innerText = 'Rp' + total.toLocaleString('id-ID');

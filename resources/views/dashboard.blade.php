@@ -19,6 +19,11 @@
         @csrf
         <button type="submit">Profile</button>
     </form>
+
+    <form method="GET" action="{{ route('topup') }}">
+        @csrf
+        <button type="submit">Top-up</button>
+    </form>
     <br>
 
     <form method="GET" action="{{ route('purchase.history') }}">

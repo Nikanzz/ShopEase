@@ -62,19 +62,13 @@ Saldo anda: Rp.{{ Auth::user()->balance }} <br><br>
 
 <br>
 
-<form method="GET" action="{{ route('purchase', $product->id)  }}">
-        @csrf
-<button>
-BELI
-</button>
-</form>
-
-
-<button>
-MASUKKAN KERANJANG
-</button>
-<h2>
-ULASAN 
-</h2>
+  <form method="GET" action="{{ route('purchase' , $product) }}">
+    <button>
+    MASUKKAN KERANJANG
+    </button>
+  </form>
+  <h2>
+    ULASAN 
+  </h2>
 
 

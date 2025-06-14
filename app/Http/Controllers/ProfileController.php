@@ -20,6 +20,12 @@ class ProfileController extends Controller
         return view('profile.edit', compact('user'));
     }
 
+    public function showTopup(){
+        $user = auth()->user();
+        
+        return view('topup');
+    }
+
     public function updateProfile(Request $request)
     {
         $validated = $request->validate([
@@ -47,5 +53,16 @@ class ProfileController extends Controller
         $user->delete();
 
         return redirect('/login')->with('success', 'Profile deleted successfully.');
+    }
+
+    public function processTopup(Request $request){
+        $validated = $request->validate([
+            'amount' => 'required|min:0'
+        ]);
+
+        $user = auth()->user();
+        $user->balance = $user->balance+$validated['amount'];
+        $user->save();
+        return redirect('/dashboard');
     }
 }
