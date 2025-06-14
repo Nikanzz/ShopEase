@@ -29,8 +29,6 @@ class RegisterController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        Log::info($user);
-
         Auth::login($user);
 
         $request->session()->regenerate();

@@ -23,7 +23,7 @@ class SellerFactory extends Factory
     {
         return [
             'user_id' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
-            'shopname' => $this->faker->company(),
+            'shopname' => fake()->unique()->company(),
         ];
     }
 }

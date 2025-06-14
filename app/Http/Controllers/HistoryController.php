@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class HistoryController extends Controller
 {
-    //GET history
+    //GET history for User orders(User side)
     public function showPurchaseHistory(Request $request){
         $name = Auth::user()->name;
         $id = Auth::user()->id;
@@ -20,4 +20,7 @@ class HistoryController extends Controller
         }
         return view('history')->with('history',$history);
     }
+
+    //TODO: GET history for Seller's orders(Seller side)
+    public function showSellHistory(Request $request){}
 }

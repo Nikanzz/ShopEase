@@ -14,12 +14,6 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $data = ['S','A','B','C','D','E','F'];
-
-        foreach($data as $i){
-            DB::table('categories')->insert([
-                'name' => $i
-            ]);
-        }
+        Category::factory(20)->create();
     }
 }

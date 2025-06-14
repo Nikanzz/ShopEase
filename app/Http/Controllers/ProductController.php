@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Seller;
+use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +47,7 @@ class ProductController extends Controller
         $seller = DB::table('sellers')->where('user_id' , $id)->first();
         $sellerId = $seller->id;
 
-        DB::table('products')->insert([
+        Product::create([
             'name' => $validated['name'],
             'description' => $validated['description'],
             'price' => $validated['price'],

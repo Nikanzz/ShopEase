@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('product_name');
             $table->integer('amount');
+            $table->boolean('fullfilled')->default(false);
             $table->decimal('price' , 10 , 2);
         });
     }

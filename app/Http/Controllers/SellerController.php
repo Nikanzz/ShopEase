@@ -12,10 +12,6 @@ class SellerController extends Controller
         return view('seller-register');
     }
 
-    public function cancelSeller(Request $request){
-        return redirect()->back();
-    }
-
     public function createNewSeller(Request $request){
         $val = $request->validate([
             'name' => 'required|string|max:40'

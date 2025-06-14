@@ -40,12 +40,12 @@
             <button type="submit">Manage Products</button>
         </form>
         <br>
-        <form method="GET" action="{{ route('order.history') }}">
+        <form method="GET" action="{{ route('logout') }}">
             @csrf
             <button type="submit">Order History</button>
         </form>
         <br>
-        <form method="GET" action="{{ route('seller.orders') }}">
+        <form method="GET" action="{{ route('logout') }}">
             @csrf
             <button type="submit">Manage Orders</button>
         </form>
