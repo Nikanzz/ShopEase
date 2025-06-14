@@ -21,6 +21,8 @@ class HistoryController extends Controller
         return view('history')->with('history',$history);
     }
 
+    //GET manage current orders in Seller side
+
     //TODO: GET history for Seller's orders(Seller side)
     public function showSellHistory(Request $request){}
 }
