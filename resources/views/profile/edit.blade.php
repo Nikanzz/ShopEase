@@ -23,14 +23,19 @@
         <br>
 
         <label for="phone">Phone:</label>
-        <input type="text" id="phone" name="phone" value="{{ Auth::user()->phone }}" required>
+        <input type="text" id="phone" name="phone" value="{{ Auth::user()->phone }}">
         <br>
 
         <label for="address">Address:</label>
-        <input type="text" id="address" name="address" value="{{ Auth::user()->address }}" required>
+        <input type="text" id="address" name="address" value="{{ Auth::user()->address }}">
         <br>
         
         <button type="submit">Update Profile</button>
+    </form>
+
+    <form method="GET" action="{{ route('profile') }}">
+        @csrf
+        <br><br><button type="submit">Cancel</button>
     </form>
 </body>
 </html>

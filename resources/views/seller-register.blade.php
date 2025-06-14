@@ -14,5 +14,19 @@
         <input type="text" id="name" name="name" maxlength="40"><br><br>
         <button type="submit">Submit</button>
     </form>
+
+    <br>
+    @if(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'profile')
+        <form method="GET" action="{{ route('profile') }}">
+            @csrf
+            <button type="submit">Back to Profile</button>
+        </form>
+    @elseif(app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName() == 'dashboard')
+        <form method="GET" action="{{ route('dashboard') }}">
+            @csrf
+            <button type="submit">Back to Dashboard</button>
+        </form>
+    @endif
+    
 </body>
 </html>
