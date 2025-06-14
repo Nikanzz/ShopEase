@@ -1,3 +1,7 @@
+@php
+    use App\Models\Seller;
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,18 +40,22 @@
             <button type="submit">Manage Products</button>
         </form>
         <br>
-        <form method="GET" action="{{ route('order.history') }}">
+        <form method="GET" action="{{ route('logout') }}">
             @csrf
             <button type="submit">Order History</button>
         </form>
         <br>
-        <form method="GET" action="{{ route('seller.orders') }}">
+        <form method="GET" action="{{ route('logout') }}">
             @csrf
             <button type="submit">Manage Orders</button>
         </form>
     @else
-        <h2>Not a Seller</h2>
-        <p>You are not a seller. <a href="{{ route('become.seller') }}">Become a seller</a></p>
+        <h2>You are not a seller!</h2>
+        <br>
+        <form method="POST" action="{{ route('become.seller') }}">
+        @csrf
+            <button type="submit">Become a seller</button>
+        </form>
     @endif
     <br>
 

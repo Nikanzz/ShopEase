@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('histories', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->dateTime('bought_at' , 0);
+            $table->dateTime('bought_at' , 0)->default();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('product_name');
             $table->integer('amount');
+            $table->boolean('fullfilled')->default(false);
             $table->decimal('price' , 10 , 2);
         });
     }

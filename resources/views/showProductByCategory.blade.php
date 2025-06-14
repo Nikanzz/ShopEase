@@ -4,6 +4,12 @@
 <form method="GET" action="{{ route('dashboard') }}">
         @csrf
         <button type="submit">Back to Dashboard</button>
+        <br>
+    </form>
+<form method="GET" action="{{ route('cart') }}">
+        @csrf
+        <button type="submit">Cart</button>
+        <br>
     </form>
 <table border="1" cellpadding="5" cellspacing="0"> 
   <thead> 

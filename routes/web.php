@@ -37,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/products' , [ProductController::class , 'showProducts'])->name('product.list');
     Route::post('/becomeseller' , [SellerController::class , 'becomeSeller'])->name('become.seller');
     Route::post('/sellerregister' , [SellerController::class , 'createNewSeller'])->name('register.seller');
+    Route::get('/topup', [ProfileController::class, 'showTopup'])->name('topup');
+    Route::post('/processtopup', [ProfileController::class, 'processTopup'])->name('topup.process');
     Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
     Route::get('/profile/edit', [ProfileController::class, 'showEditProfileForm'])->name('profile.edit');
     Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
@@ -44,7 +46,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/category/{category}' , [ProductByCategoryController::class , 'showProductByCategory'])->name('product.category');
     Route::get('/product/{product}' , [ProductDetailController::class , 'showProductDetail'])->name('product.detail');
     Route::get('/store/{seller}' , [StoreDetailController::class , 'showStoreDetail'])->name('store.detail');
-    Route::get('/purchase/{product}' , [PurchaseController::class , 'Purchase'])->name('purchase');
+    Route::get('/purchase/{product}' , [PurchaseController::class , 'purchase'])->name('purchase');
+    Route::post('/addtocart' , [PurchaseController::class , 'addToCart'])->name('add.to.cart');
+    Route::get('/cart' , [PurchaseController::class , 'showCart'])->name('cart');
+    Route::get('/removecart/{id}' , [PurchaseController::class , 'removeFromCart'])->name('cart.remove');
+    Route::get('/buy' , [PurchaseController::class ,'buy'])->name('buy');
+    Route::get('/changeamount/{id}' , [PurchaseController::class ,'showChangeAmount'])->name('change.amount');
+    Route::post('/changeprocessamount' , [PurchaseController::class ,'processChangeAmount'])->name('change.amount.process');
 });
 
 Route::get('/', function () {

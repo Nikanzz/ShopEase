@@ -12,7 +12,10 @@
         <li>Name: {{ Auth::user()->name }}</li>
         <li>Email: {{ Auth::user()->email }}</li>
     </ul>
-
+    <form method="GET" action="{{ route('dashboard') }}">
+        @csrf
+        <button type="submit">Back to dashboard</button><br><br>
+    </form>
 <table border="1" cellpadding="5" cellspacing="0"> 
   <thead> 
     <tr> 

@@ -34,6 +34,7 @@ class ProductByCategoryController extends Controller
             $products = Product::where('category_id', $ids)->with('seller')->get();
         }
         
+        $request->session()->put('categoryid',$ids);
         return view('showProductByCategory')
         ->with('products', $products)
         ->with('category', $category);

@@ -5,7 +5,7 @@ Harga satuan : Rp{{ number_format($product->price, 0, ',', '.') }}<br>
 Nama toko : {{ $product->seller->shopname }}<br>
 Stok tersedia: {{ $product->stock }}<br><br>
 
-<form method="POST" action="{{route('add.to.cart')}}">
+<form method="POST" action="{{route('change.amount.process')}}">
     @csrf
     <label for="quantity">Jumlah yang ingin dibeli: </label>
     <input type="hidden" name="pid" value="{{$product->id}}">

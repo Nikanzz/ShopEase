@@ -20,6 +20,12 @@ class ProfileController extends Controller
         return view('profile.edit', compact('user'));
     }
 
+    public function showTopup(){
+        $user = auth()->user();
+        
+        return view('topup');
+    }
+
     public function updateProfile(Request $request)
     {
         $validated = $request->validate([
@@ -27,6 +33,7 @@ class ProfileController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email,' . auth()->id(),
             'username' => 'required|string|max:255|unique:users,username,' . auth()->id(),
             'phone' => 'nullable|string|max:15',
+            'address' => 'nullable|string',
         ]);
 
         $user = auth()->user();
@@ -34,6 +41,7 @@ class ProfileController extends Controller
         $user->email = $validated['email'];
         $user->username = $validated['username'];
         $user->phone = $validated['phone'];
+        $user->address= $validated['address'];
         $user->save();
 
         return redirect()->route('profile')->with('success', 'Profile updated successfully.');
@@ -45,5 +53,16 @@ class ProfileController extends Controller
         $user->delete();
 
         return redirect('/login')->with('success', 'Profile deleted successfully.');
+    }
+
+    public function processTopup(Request $request){
+        $validated = $request->validate([
+            'amount' => 'required|min:0'
+        ]);
+
+        $user = auth()->user();
+        $user->balance = $user->balance+$validated['amount'];
+        $user->save();
+        return redirect('/dashboard');
     }
 }
