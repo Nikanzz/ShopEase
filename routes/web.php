@@ -14,6 +14,7 @@ use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\StoreDetailController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\DashboardController;
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
@@ -27,7 +28,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/history' , [HistoryController::class , 'showPurchaseHistory'])->name('purchase.history');
     Route::get('/createProduct' , [ProductController::class , 'redirectCreateProduct'])->name('create.product');
@@ -55,6 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/changeamount/{id}' , [PurchaseController::class ,'showChangeAmount'])->name('change.amount');
     Route::post('/changeprocessamount' , [PurchaseController::class ,'processChangeAmount'])->name('change.amount.process');
     Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store')->middleware('auth');
+    Route::get('/search', [ProductController::class, 'searchProduct'])->name('products.search');
 });
 
 Route::get('/', function () {

@@ -30,11 +30,6 @@ class LoginController extends Controller
         ]);
     }
 
-    public function dashboard() {
-        $category = Category::all();
-        return view('dashboard', compact('category'));
-    }
-
     public function logout(Request $request) {
         Auth::logout();
         $request->session()->invalidate();
