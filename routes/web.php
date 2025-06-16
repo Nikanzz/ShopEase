@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductByCategoryController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\StoreDetailController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\ReviewController;
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
@@ -53,6 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/buy' , [PurchaseController::class ,'buy'])->name('buy');
     Route::get('/changeamount/{id}' , [PurchaseController::class ,'showChangeAmount'])->name('change.amount');
     Route::post('/changeprocessamount' , [PurchaseController::class ,'processChangeAmount'])->name('change.amount.process');
+    Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store')->middleware('auth');
 });
 
 Route::get('/', function () {

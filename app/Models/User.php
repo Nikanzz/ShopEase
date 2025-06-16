@@ -9,6 +9,11 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    public function reviews()
+    {
+        return $this->hasOne(Review::class);
+    }
+    
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 

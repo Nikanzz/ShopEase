@@ -67,8 +67,53 @@ Saldo anda: Rp.{{ Auth::user()->balance }} <br><br>
     MASUKKAN KERANJANG
     </button>
   </form>
-  <h2>
-    ULASAN 
-  </h2>
+  <h2>ULASAN</h2>
 
+@auth
+    <h3>Berikan Ulasan Anda</h3>
+    <form action="{{ route('reviews.store') }}" method="POST">
+        @csrf
+        <input type="hidden" name="product_id" value="{{ $product->id }}">
 
+        <div>
+            <label for="rating">Rating:</label>
+            <select name="rating" id="rating" required>
+                <option value="">Pilih Rating</option>
+                <option value="5">⭐⭐⭐⭐⭐ (Sangat Baik)</option>
+                <option value="4">⭐⭐⭐⭐ (Baik)</option>
+                <option value="3">⭐⭐⭐ (Cukup)</option>
+                <option value="2">⭐⭐ (Kurang)</option>
+                <option value="1">⭐ (Buruk)</option>
+            </select>
+            @error('rating')
+                <span style="color: red;">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div>
+            <label for="comment">Komentar:</label>
+            <textarea name="comment" id="comment" rows="4" placeholder="Tulis ulasan Anda di sini..."></textarea>
+            @error('comment')
+                <span style="color: red;">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <button type="submit">Kirim Ulasan</button>
+    </form>
+    <hr>
+@else
+    <p>Anda harus <a href="{{ route('login') }}">login</a> untuk memberikan ulasan.</p>
+@endauth
+@if(DB::table('reviews')->where('product_id' , $product->id)->exists())
+@foreach (DB::table('reviews')->where('product_id' , $product->id)->get() as $review)
+    <div>
+        <strong>{{ DB::table('users')->where('id' , $review->user_id)->first()->username }}</strong> -
+        <span>Rating: {{ str_repeat('⭐', $review->rating) }}</span>
+        <p>{{ $review->comment }}</p>
+        <small>Pada: {{ $review->created_at }}</small>
+    </div>
+    <hr>
+@endforeach
+@else 
+<p>Belum ada ulasan untuk produk ini.</p>
+@endif

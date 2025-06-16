@@ -2,15 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Seller;
-use App\Models\Product;
+use App\Models\Product; // import
+use App\Models\Review;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+    public function show(Product $product) // Menggunakan Route Model Binding
+    {
+        // Ambil ulasan untuk produk ini, bersama dengan informasi user yang memberikan ulasan
+        $reviews = $product->reviews()->with('user')->latest()->get();
+
+        return view('poduct.show', compact('product', 'reviews'));
+        // Pastikan Anda meneruskan variabel $reviews ke view
+    }
+
     private function getProducts(Request $request){
         $id = Auth::user()->id;
         $seller = DB::table('sellers')->where('user_id' , $id)->first();
