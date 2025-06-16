@@ -4,92 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body>
-    <h1>Welcome to the Dashboard</h1>
-    <p>You are logged in!</p>
+    @include('components.navigation-bar')
 
-    <h2>User Information</h2>
-    <ul>
-        <li>Name: {{ Auth::user()->name }}</li>
-        <li>Email: {{ Auth::user()->email }}</li>
-        <li>Saldo: {{ Auth::user()->balance }}</li>
-    </ul>
-    <form method="GET" action="{{ route('profile') }}">
-        @csrf
-        <button type="submit">Profile</button>
-    </form>
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-2xl font-bold mb-6">Categories</h1>
 
-    <form method="GET" action="{{ route('topup') }}">
-        @csrf
-        <button type="submit">Top-up</button>
-    </form>
-    <br>
-
-    <form method="GET" action="{{ route('purchase.history') }}">
-        @csrf
-        <button type="submit">Riwayat</button>
-    </form>
-    <br>
-
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button type="submit">Logout</button>
-    </form>
-    <br>
-    <br>
-
-    @if (DB::table('sellers')->where('user_id' , Auth::user()->id)->exists())
-        <h1>You are a seller!</h1>
-        <h2>Manage your shop: {{ DB::table('sellers')->where('user_id' , Auth::user()->id)->first()->shopname }}</h2>
-        <br>
-        <form method="GET" action="{{ route('product.list') }}">
-            @csrf
-            <button type="submit">Manage Products</button>
-        </form>
-        <br>
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit">Manage orders</button>
-        </form>
-        <br>
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit">Order history</button>
-        </form>
-        <br>
-    @else
-        <h1>You are not a seller!</h1>
-        <br>
-        <form method="POST" action="{{ route('become.seller') }}">
-        @csrf
-            <button type="submit">Become a seller</button>
-        </form>
-    @endif
-    
-  <h2>Kategori Produk</h2>
-<table border="1" cellpadding="5" cellspacing="0"> 
-  <thead> 
-    
-  </thead> 
-  <tbody> 
-    @foreach($category as $categories) 
-      <tr> 
-
-      
-        <td>
-          {{Log::info($categories)}} 
-           <a href = "{{ route('product.category', $categories) }}"> 
-           {{$categories->name}} 
-            </a>
-        </td> 
-        
-
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            @foreach($categories as $category)
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-200">
+                    <a href="{{ route('product.category', $category->id) }}" class="block p-4">
+                        <h3 class="font-semibold text-lg text-gray-800 mb-2">{{ $category->name }}</h3>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
+    <hr class="my-8">
   
-      </tr> 
-    @endforeach 
-  </tbody> 
-</table>
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-2xl font-bold mb-6">Recommended</h1>
 
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach($products as $product)
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-200 flex flex-col gap-10">
+                    <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                        <span class="text-gray-500"><img src="https://img.freepik.com/premium-vector/supermarket-products-cartoon_24640-55629.jpg" alt="{{ $product->name }}" class="w-full h-full object-cover"></span>
+                    </div>
+
+                    <div class="p-4 flex flex-col flex-grow">
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-800 mb-2 truncate">{{ $product->name }}</h3>
+                            <p class="text-gray-600 text-sm mb-4">{{ $product->description }}</p>
+                        </div>
+
+                        <div class="mt-auto">
+                            <p class="text-blue-600 font-bold mb-4">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
+                            <a href="{{ route('product.detail', $product->id) }}" 
+                            class="inline-block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                            Lihat Detail
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
 </body>
 </html>
