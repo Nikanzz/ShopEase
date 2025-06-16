@@ -10,12 +10,12 @@
 
             <!-- Search bar -->
             <div class="flex-1 max-w-2xl mx-8">
-                <form method="GET" class="relative">
+                <form action="{{ route('products.search') }}" method="GET" class="relative">
                     <div class="flex">
                         <input 
                             type="text" 
-                            name="q" 
-                            value="{{ request('q') }}"
+                            name="query" 
+                            value="{{ request('query') }}"
                             placeholder="Search products, brands and categories..."
                             class="flex-1 px-4 py-3 border-2 border-orange-500 rounded-l-md focus:outline-none focus:border-orange-600">
                         <button 
@@ -42,14 +42,14 @@
 
                         <div class="absolute right-0 top-full w-48 bg-white rounded-md shadow-lg border group-hover:block hidden hover:block">
                             <div class="py-2">
-                                <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     <i data-lucide="user" class="w-4 h-4 inline mr-2"></i>My Profile
                                 </a>
-                                <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <a href="{{ route('topup') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     <i data-lucide="wallet" class="w-4 h-4 inline mr-2"></i>My Balance
                                 </a>
-                                <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                    <i data-lucide="package" class="w-4 h-4 inline mr-2"></i>My Orders
+                                <a href="{{ route('purchase.history') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i data-lucide="history" class="w-4 h-4 inline mr-2"></i>My History
                                 </a>
                                 <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     <i data-lucide="star" class="w-4 h-4 inline mr-2"></i>My Reviews
@@ -72,7 +72,7 @@
                     </div>
                 @endauth
             </div>
-            <a href="{{ route('dashboard') }}" class="relative group">
+            <a href="{{ route('cart') }}" class="relative group">
                     <i data-lucide="shopping-cart" class="w-5 h-5 text-gray-900 group-hover:text-orange-500"></i> 
             </a>
         </div>
