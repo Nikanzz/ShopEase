@@ -83,7 +83,9 @@ class ProductController extends Controller
             'stock' => 'required|integer',
             'category_id' => 'required'
         ]);
-        $product = DB::table('products')->where('id' , $request['id'])->update($validated);
+        $query =DB::table('products')->where('id' , $request['id']);
+        DB::table('histories')->where('product_name' , $query->firstorFail()->name)->update(['product_name' => $validated['name']]);
+        $product = $query->update($validated);
         return view('product-list')->with('products' , ProductController::getProducts($request));
     }
 
@@ -111,4 +113,10 @@ class ProductController extends Controller
         return view('search-results', compact('products', 'query'));
     }
     
+    public function sendProduct(Request $request , int $hid){
+        $history = DB::table('histories')->where('id' , $hid)->firstOrFail();
+        $history->fullfilled = true;
+        $history->save();
+        return redirect('/orders');
+    }
 }
