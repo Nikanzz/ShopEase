@@ -33,39 +33,52 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-1">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                    <div class="flex items-center p-3 bg-gray-50 rounded-lg">
-                        <i class="fas fa-user text-gray-400 mr-3"></i>
-                        <span class="text-gray-900">{{ Auth::user()->name }}</span>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-user text-gray-400 mr-3"></i>
+                            <span class="text-gray-900">{{ Auth::user()->name }}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-envelope text-gray-400 mr-3"></i>
+                            <span class="text-gray-900">{{ Auth::user()->email }}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-phone text-gray-400 mr-3"></i>
+                            <span class="text-gray-900">{{ Auth::user()->phone ?? 'Not provided' }}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Address</label>
+                        <div class="flex items center p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-map-marker-alt text-gray-400 mr-3"></i>
+                            <span class="text-gray-900">{{ Auth::user()->address ?? 'Not provided' }}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Join Date</label>
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-calendar text-gray-400 mr-3"></i>
+                            <span class="text-gray-900">{{ Auth::user()->created_at->format('M d, Y') }}</span>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                <div class="flex flex-col items-center justify-center">
                     <div class="flex items-center p-3 bg-gray-50 rounded-lg">
-                        <i class="fas fa-envelope text-gray-400 mr-3"></i>
-                        <span class="text-gray-900">{{ Auth::user()->email }}</span>
+                        <i class="fas fa-image text-gray-400 mr-3"></i>
+                        @if (Auth::user()->profile_picture)
+                            <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="w-84 h-84 rounded-full">
+                        @else
+                            <span class="text-gray-900">No picture uploaded</span>
+                        @endif
                     </div>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                    <div class="flex items-center p-3 bg-gray-50 rounded-lg">
-                        <i class="fas fa-phone text-gray-400 mr-3"></i>
-                        <span class="text-gray-900">{{ Auth::user()->phone ?? 'Not provided' }}</span>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Address</label>
-                    <div class="flex items center p-3 bg-gray-50 rounded-lg">
-                        <i class="fas fa-map-marker-alt text-gray-400 mr-3"></i>
-                        <span class="text-gray-900">{{ Auth::user()->address ?? 'Not provided' }}</span>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Join Date</label>
-                    <div class="flex items-center p-3 bg-gray-50 rounded-lg">
-                        <i class="fas fa-calendar text-gray-400 mr-3"></i>
-                        <span class="text-gray-900">{{ Auth::user()->created_at->format('M d, Y') }}</span>
-                    </div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Profile Picture</label>                    
                 </div>
             </div>
         </div>
