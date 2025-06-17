@@ -48,30 +48,40 @@ class PurchaseController extends Controller
 
     public function buy(Request $request){
         $cart = $request->session()->get('cart');
-        $user = Auth::user();
-        $bal = $user->balance;
 
-        foreach($cart as $item){
-            $p = Product::where('id',$item['productId'])->firstOrFail();
-            $p->stock = $p->stock - $item['amount'];
-            $bal = $bal - $p->price * $item['amount'];
+        if ($cart == null || count($cart) == 0){
+            return redirect('/cart')->with('error', 'Your cart is empty.!');
+        }
+
+        $user = Auth::user();
+
+        $totalCost = 0;
+        foreach ($cart as $item) {
+            $product = Product::findOrFail($item['productId']);
+            $totalCost += $product->price * $item['amount'];
+        }
+
+        foreach ($cart as $item) {
+            $product = Product::findOrFail($item['productId']);
+
+            $product->stock -= $item['amount'];
+            $product->save();
 
             DB::table('histories')->insert([
                 'bought_at' => now(),
                 'user_id' => $user->id,
-                'product_name' => $p->name,
+                'product_name' => $product->name,
                 'amount' => $item['amount'],
                 'fullfilled' => false,
-                'price' => $p->price,
+                'price' => $product->price,
             ]);
         }
 
-        $user->balance = $bal;
+        $user->balance -= $totalCost;
         $user->save();
-
         $request->session()->put('cart' , []);
 
-        return redirect('/cart');
+        return redirect('/cart')->with('success', 'Purchase successful!');
     }
 
     public function showChangeAmount(Request $request , int $id){
