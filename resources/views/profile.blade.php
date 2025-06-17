@@ -101,6 +101,30 @@
                     </div>
                 </div>
             </div>
+            <div class="bg-gray-50 rounded-xl p-6 mb-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Shop Actions</h3>
+                <form method="GET" action="{{ route('product.list') }}" class="inline-block">
+                    @csrf
+                    <button type="submit" class="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition duration-200">
+                        <i class="fas fa-box mr-2"></i>
+                        Manage Products
+                    </button>
+                </form>
+                <form method="GET" action="{{ route('logout') }}" class="inline-block">
+                    @csrf
+                    <button type="submit" class="cursor-pointer bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition duration-200">
+                        <i class="fas fa-shopping-cart mr-2"></i>
+                        Order History
+                    </button>
+                </form>
+                <form method="GET" action="{{ route('logout') }}" class="inline-block">
+                    @csrf
+                    <button type="submit" class="cursor-pointer bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold transition duration-200">
+                        <i class="fas fa-edit mr-2"></i>
+                        Manage Orders
+                    </button>
+                </form>
+            </div>
         @else
             <div class="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-8 text-white">
                 <div class="text-center">
