@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -34,6 +35,7 @@ class ProfileController extends Controller
             'username' => 'required|string|max:255|unique:users,username,' . auth()->id(),
             'phone' => 'nullable|string|max:15',
             'address' => 'nullable|string',
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:20480', 
         ]);
 
         $user = auth()->user();
@@ -42,6 +44,16 @@ class ProfileController extends Controller
         $user->username = $validated['username'];
         $user->phone = $validated['phone'];
         $user->address= $validated['address'];
+
+        if ($request->hasFile('profile_picture')) {
+            if ($user->profile_picture) {
+                Storage::disk('public')->delete($user->profile_picture);
+            }
+
+            $profilePicturePath = $request->file('profile_picture')->store('profile_pictures', 'public');
+            $user->profile_picture = $profilePicturePath;
+        }
+
         $user->save();
 
         return redirect()->route('profile')->with('success', 'Profile updated successfully.');

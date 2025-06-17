@@ -1,14 +1,12 @@
 <nav class="bg-white shadow-md sticky top-0 z-50">
     <div class="container mx-auto px-4">
         <div class="flex items-center justify-between py-5">
-            <!-- Logo -->
             <div class="flex items-center space-x-4">
                 <div class="bg-orange-500 text-white font-bold text-xl px-3 py-2 rounded">
                     <a href="{{ route('dashboard') }}">ShopEase</a>
                 </div>
             </div>
 
-            <!-- Search bar -->
             <div class="flex-1 max-w-2xl mx-8">
                 <form action="{{ route('products.search') }}" method="GET" class="relative">
                     <div class="flex">
@@ -27,15 +25,11 @@
                 </form>
             </div>
 
-            <!-- Cart and User Menu -->
              <div>          
                 @auth
-                    <!-- User Dropdown -->
                     <div class="relative group">
                         <button class="flex items-center space-x-2 text-gray-700 hover:text-orange-500 focus:outline-none">
-                            <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-                                <i class="w-4 h-4"></i>
-                            </div>
+                            <img src="{{ auth()->user()->profile_picture_url }}" class="w-10 h-10 rounded-full">
                             <span class="hidden md:block">{{ Auth::user()->name }}</span>
                             <i class="w-4 h-4"></i>
                         </button>
@@ -65,7 +59,6 @@
                         </div>
                     </div>
                 @else
-                    <!-- Login/Register -->
                     <div class="flex items-center space-x-3">
                         <a href="{{ route('login') }}" class="text-gray-600 hover:text-orange-500">Login</a>
                         <a href="{{ route('register') }}" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">Sign Up</a>
