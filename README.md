@@ -55,7 +55,6 @@ php artisan migrate
 
 # (Optional) Seed the database with sample data
 php artisan db:seed
-php artisan db:seed CategorySeeder
 ```
 
 ### 6. Run the Application
