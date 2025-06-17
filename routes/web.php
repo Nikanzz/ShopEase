@@ -55,7 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/buy' , [PurchaseController::class ,'buy'])->name('buy');
     Route::get('/changeamount/{id}' , [PurchaseController::class ,'showChangeAmount'])->name('change.amount');
     Route::post('/changeprocessamount' , [PurchaseController::class ,'processChangeAmount'])->name('change.amount.process');
-    Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store')->middleware('auth');
+    Route::post('/review', [ReviewController::class, 'store'])->name('reviews.store');
     Route::get('/search', [ProductController::class, 'searchProduct'])->name('products.search');
 });
 
