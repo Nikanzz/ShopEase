@@ -36,6 +36,9 @@
                     Kembali ke Dashboard
                 </a>
             </form>
+             @error ('query')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
         </div>
 
         @if($products->count() > 0)

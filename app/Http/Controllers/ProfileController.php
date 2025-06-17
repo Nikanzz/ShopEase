@@ -17,7 +17,7 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
         
-        return view('profile.edit', compact('user'));
+        return view('components.profile.edit', compact('user'));
     }
 
     public function showTopup(){

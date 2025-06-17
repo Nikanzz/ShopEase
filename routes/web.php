@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/processtopup', [ProfileController::class, 'processTopup'])->name('topup.process');
     Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
     Route::get('/profile/edit', [ProfileController::class, 'showEditProfileForm'])->name('profile.edit');
-    Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::put('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::post('/profile/delete', [ProfileController::class, 'deleteProfile'])->name('profile.delete');
     Route::get('/category/{category}' , [ProductByCategoryController::class , 'showProductByCategory'])->name('product.category');
     Route::get('/product/{product}' , [ProductDetailController::class , 'showProductDetail'])->name('product.detail');

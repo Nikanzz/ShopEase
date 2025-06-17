@@ -99,18 +99,15 @@ class ProductController extends Controller
     }
 
     public function searchProduct(Request $request){
-        $query = $request->input('query');
-
-        if (!$query) {
-            return redirect()->back()->with('error', 'Please enter a search term.');
-        }
+        $validated = $request->validate([
+            'query' => 'required|string|max:255',
+        ]);
+        $query = $validated['query'];
 
         $products = Product::where('name', 'LIKE', "%{$query}%")
+            ->orWhere('description', 'LIKE', "%{$query}%")
             ->paginate(12);
 
-        if ($products->isEmpty()) {
-            return redirect()->back()->with('error', 'No products found for your search term.');
-        }
         return view('search-results', compact('products', 'query'));
     }
     
