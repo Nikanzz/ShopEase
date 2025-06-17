@@ -36,7 +36,15 @@ class PurchaseController extends Controller
         $cart = $request->session()->get('cart');
         Log::info($cart);
         if($cart == null) $cart = [];
-        return view('cart')->with('items' , $cart);
+        $totalCost = 0;
+        foreach ($cart as $item) {
+            $product = Product::findOrFail($item['productId']);
+            $totalCost += $product->price * $item['amount'];
+        }
+        return view('cart')->with([
+            'items' => $cart,
+            'totalCost' => $totalCost
+        ]);
     }
 
     public function removeFromCart(Request $request , int $id){
