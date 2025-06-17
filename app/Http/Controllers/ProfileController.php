@@ -72,6 +72,10 @@ class ProfileController extends Controller
             'amount' => 'required|min:0'
         ]);
 
+        if ($validated['amount'] >= 1000000000) {
+            return redirect()->back()->withErrors(['amount' => 'Top-up amount must be less than Rp.1,000,000,000.']);
+        }
+
         $user = auth()->user();
         $user->balance = $user->balance+$validated['amount'];
         $user->save();

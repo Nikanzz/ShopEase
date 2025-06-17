@@ -82,11 +82,11 @@ $allow = true;
       </tr> 
   </tbody> 
 </table> 
-  <p>Balance : {{Auth::user()->balance}}</p>
+  <p>Balance : Rp {{ number_format(Auth::user()->balance, 0, ',', '.') }}</p>
   @if($end > Auth::user()->balance)
   <p>You don't have enough balance to buy these items</p>
   @elseif($allow)
-  <form method="GET" action="{{route('buy')}}">
+  <form method="POST" action="{{route('buy')}}">
   @csrf
   <br>
   <button type="submit">COMPLETE PURCHASE</button>
