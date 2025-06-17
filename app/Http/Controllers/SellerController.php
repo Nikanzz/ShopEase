@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Seller;
+use App\Models\Product;
 
 class SellerController extends Controller
 {
@@ -26,5 +28,11 @@ class SellerController extends Controller
 
         $request->session()->regenerate();
         return redirect('/dashboard');
+    }
+
+    public function showOrders(Request $request){
+        $sid = DB::table('sellers')->where('user_id' , Auth::user()->id)->firstOrFail()->id;
+        $hist = DB::table('histories')->whereIn('product_name' , Product::where('seller_id' , $sid)->get())->get();
+        return view('manage-orders')->with('orders' , $hist);
     }
 }

@@ -134,6 +134,17 @@
                         Delete Account
                     </button>
                 </form>
+
+                <!-- Temporary -->
+                <form method="GET" action="{{ route('orders.seller') }}" >
+                    @csrf
+                    <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white px-4 py-3 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-trash mr-2"></i>
+                        Manage Orders
+                    </button>
+                </form>
+                <!-- End Temporary -->
+                 
             </div>
         </div>
     </body>

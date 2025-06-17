@@ -30,24 +30,32 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-    Route::get('/history' , [HistoryController::class , 'showPurchaseHistory'])->name('purchase.history');
+    
     Route::get('/createProduct' , [ProductController::class , 'redirectCreateProduct'])->name('create.product');
     Route::post('/createProductProcess' , [ProductController::class , 'createProduct'])->name('new.product');
     Route::get('/manageProduct/{i}' , [ProductController::class , 'manageProductRedirect'])->name('manage.product');
     Route::post('/changeProduct' , [ProductController::class , 'changeProduct'])->name('change.product');
     Route::get('/deleteProduct/{product_id}' , [ProductController::class , 'deleteProduct'])->name('delete.product');
     Route::get('/products' , [ProductController::class , 'showProducts'])->name('product.list');
+    
     Route::post('/becomeseller' , [SellerController::class , 'becomeSeller'])->name('become.seller');
     Route::post('/sellerregister' , [SellerController::class , 'createNewSeller'])->name('register.seller');
+    Route::get('/orders' , [SellerController::class , 'showOrders'])->name('orders.seller');
+    
+    Route::get('/history' , [HistoryController::class , 'showPurchaseHistory'])->name('purchase.history');
     Route::get('/topup', [ProfileController::class, 'showTopup'])->name('topup');
     Route::post('/processtopup', [ProfileController::class, 'processTopup'])->name('topup.process');
     Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
     Route::get('/profile/edit', [ProfileController::class, 'showEditProfileForm'])->name('profile.edit');
     Route::put('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::post('/profile/delete', [ProfileController::class, 'deleteProfile'])->name('profile.delete');
+
+    Route::get('/search', [ProductController::class, 'searchProduct'])->name('products.search');
     Route::get('/category/{category}' , [ProductByCategoryController::class , 'showProductByCategory'])->name('product.category');
     Route::get('/product/{product}' , [ProductDetailController::class , 'showProductDetail'])->name('product.detail');
     Route::get('/store/{seller}' , [StoreDetailController::class , 'showStoreDetail'])->name('store.detail');
+    Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store')->middleware('auth');
+
     Route::get('/purchase/{product}' , [PurchaseController::class , 'purchase'])->name('purchase');
     Route::post('/addtocart' , [PurchaseController::class , 'addToCart'])->name('add.to.cart');
     Route::get('/cart' , [PurchaseController::class , 'showCart'])->name('cart');
@@ -55,8 +63,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/buy' , [PurchaseController::class ,'buy'])->name('buy');
     Route::get('/changeamount/{id}' , [PurchaseController::class ,'showChangeAmount'])->name('change.amount');
     Route::post('/changeprocessamount' , [PurchaseController::class ,'processChangeAmount'])->name('change.amount.process');
-    Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store')->middleware('auth');
-    Route::get('/search', [ProductController::class, 'searchProduct'])->name('products.search');
 });
 
 Route::get('/', function () {
