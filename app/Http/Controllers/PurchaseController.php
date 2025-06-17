@@ -29,7 +29,7 @@ class PurchaseController extends Controller
 
         $request->session()->push('cart' , ['productId'=>$productId , 'amount'=>$amount]);
         $categoryid = $request->session()->get('categoryid');
-        return redirect("/category/$categoryid");
+        return redirect('/cart')->with('success', 'Product added to cart successfully!');
     }
 
     public function showCart(Request $request){
