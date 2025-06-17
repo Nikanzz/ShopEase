@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/addtocart' , [PurchaseController::class , 'addToCart'])->name('add.to.cart');
     Route::get('/cart' , [PurchaseController::class , 'showCart'])->name('cart');
     Route::get('/removecart/{id}' , [PurchaseController::class , 'removeFromCart'])->name('cart.remove');
-    Route::get('/buy' , [PurchaseController::class ,'buy'])->name('buy');
+    Route::post('/buy' , [PurchaseController::class ,'buy'])->name('buy');
     Route::get('/changeamount/{id}' , [PurchaseController::class ,'showChangeAmount'])->name('change.amount');
     Route::post('/changeprocessamount' , [PurchaseController::class ,'processChangeAmount'])->name('change.amount.process');
     Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store')->middleware('auth');

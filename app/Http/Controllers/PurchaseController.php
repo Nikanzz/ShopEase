@@ -54,7 +54,7 @@ class PurchaseController extends Controller
         foreach($cart as $item){
             $p = Product::where('id',$item['productId'])->firstOrFail();
             $p->stock = $p->stock - $item['amount'];
-            $bal = $bal + $p->price * $item['amount'];
+            $bal = $bal - $p->price * $item['amount'];
 
             DB::table('histories')->insert([
                 'bought_at' => now(),
@@ -65,6 +65,9 @@ class PurchaseController extends Controller
                 'price' => $p->price,
             ]);
         }
+
+        $user->balance = $bal;
+        $user->save();
 
         $request->session()->put('cart' , []);
 
