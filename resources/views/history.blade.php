@@ -8,7 +8,6 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-<<<<<<< jeremia
     <div class="flex p-4 justify-between items-center bg-gray-100">
         <h1 class="text-2xl font-bold mb-4">Purchase History</h1>
         <a href="{{ route('dashboard') }}" class="text-blue-500 hover:underline mb-4 inline-block">Back to Dashboard</a>
@@ -37,6 +36,9 @@
                       </p>
                       <p class="text-gray-600 text-sm mb-3">
                           Total: Rp {{ number_format($purchase->price * $purchase->amount, 0, ',', '.') }}
+                      </p>
+                      <p class="text-gray-600 text-sm mb-3">
+                          Recieved: {{ $purchase->fullfilled ? 'Yes' : 'No' }}
                       </p>
                     </div>
                     @if($purchase->review)
@@ -72,7 +74,6 @@
             @endforeach
         </div>
     @endif                 
-=======
     <h1>Your Purchase History</h1>
     <ul>
         <li>Name: {{ Auth::user()->name }}</li>
@@ -122,6 +123,5 @@
     @endforeach 
   </tbody> 
 </table> 
->>>>>>> main
 </body>
 </html>
