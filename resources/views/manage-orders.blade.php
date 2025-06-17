@@ -24,6 +24,7 @@
       <th style="width: 120px">Jumlah</th>
       <th style="width: 120px">Harga</th>
       <th style="width: 120px">Total</th>
+      <th style="width: 120px">To Send</th>
     </tr> 
   </thead> 
   <tbody> 
@@ -46,6 +47,16 @@
         </td>
         <td> 
           {{$row->price*$row->amount}}
+        </td>
+        <td> 
+          @if($row->fullfilled)
+          Sent!
+          @else
+            <form method="GET" action="{{ route('send.product',$row->id)  }}">
+            @csrf
+                <button type="submit">Send</button>
+            </form>
+            @endif
         </td>
       </tr> 
     @endforeach 

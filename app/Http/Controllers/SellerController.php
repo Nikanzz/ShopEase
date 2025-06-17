@@ -32,7 +32,7 @@ class SellerController extends Controller
 
     public function showOrders(Request $request){
         $sid = DB::table('sellers')->where('user_id' , Auth::user()->id)->firstOrFail()->id;
-        $hist = DB::table('histories')->whereIn('product_name' , Product::where('seller_id' , $sid)->get())->get();
+        $hist = DB::table('histories')->whereIn('product_name' , Product::where('seller_id' , $sid)->get())->orderBy('fullfilled' , 'ASC')->orderBy('bought_at' , 'ASC')->get();
         return view('manage-orders')->with('orders' , $hist);
     }
 }
