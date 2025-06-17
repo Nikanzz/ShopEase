@@ -84,7 +84,7 @@ class ProductController extends Controller
             'category_id' => 'required'
         ]);
         $query =DB::table('products')->where('id' , $request['id']);
-        DB::table('histories')->where('product_name' , $query->firstorFail())->update(['product_name' => $validated['name']]);
+        DB::table('histories')->where('product_name' , $query->firstorFail()->name)->update(['product_name' => $validated['name']]);
         $product = $query->update($validated);
         return view('product-list')->with('products' , ProductController::getProducts($request));
     }
