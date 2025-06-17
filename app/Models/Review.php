@@ -14,6 +14,7 @@ class Review extends Model
         'product_id',
         'rating',
         'comment',
+        'history_id',
     ];
 
     // Relasi ke User (siapa yang memberikan ulasan)
@@ -26,5 +27,10 @@ class Review extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function history()
+    {
+        return $this->belongsTo(History::class, 'history_id', 'id');
     }
 }

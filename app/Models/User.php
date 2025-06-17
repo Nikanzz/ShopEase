@@ -66,4 +66,11 @@ class User extends Authenticatable
         
         return asset('/images/default.png');
     }
+
+    public function histories()
+    {
+
+        return $this->hasMany(History::class);
+        
+    }
 }

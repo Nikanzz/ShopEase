@@ -82,6 +82,7 @@ class PurchaseController extends Controller
                 'amount' => $item['amount'],
                 'fullfilled' => false,
                 'price' => $product->price,
+                'product_id' => $product->id,
             ]);
         }
 
