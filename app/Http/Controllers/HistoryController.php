@@ -19,13 +19,8 @@ class HistoryController extends Controller
             ->get();
 
         foreach($history as $h){
-            $h->item = $h->product_name;
+            $h->item = DB::table('products')->where('id' , $h->product_id)->firstOrFail();
         }
         return view('history')->with('history', $history);
     }
-
-    //GET manage current orders in Seller side
-
-    //TODO: GET history for Seller's orders(Seller side)
-    public function showSellHistory(Request $request){}
 }

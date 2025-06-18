@@ -78,7 +78,7 @@ class PurchaseController extends Controller
             DB::table('histories')->insert([
                 'bought_at' => now(),
                 'user_id' => $user->id,
-                'product_name' => $product->name,
+                'product_id' => $product->id,
                 'amount' => $item['amount'],
                 'fullfilled' => false,
                 'price' => $product->price,

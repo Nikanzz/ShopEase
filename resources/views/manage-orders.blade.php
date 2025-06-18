@@ -34,10 +34,10 @@
            {{$row->bought_at}} 
         </td> 
         <td> 
-          {{$row->item}}
+          {{DB::table('products')->where('id' , $row->product_id)->firstOrFail()->name}}
         </td>
         <td> 
-          {{DB::table('users')->where($row->user_id)->username}}({{$row->user_id}})
+          {{DB::table('users')->where('id' ,$row->user_id)->firstOrFail()->username}}({{$row->user_id}})
         </td>
         <td> 
           {{$row->amount}}
@@ -52,7 +52,7 @@
           @if($row->fullfilled)
           Sent!
           @else
-            <form method="GET" action="{{ route('send.product',$row->id)  }}">
+            <form method="GET" action="{{ route('send.order',$row->id)  }}">
             @csrf
                 <button type="submit">Send</button>
             </form>

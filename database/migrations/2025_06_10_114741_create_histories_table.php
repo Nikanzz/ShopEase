@@ -16,10 +16,10 @@ return new class extends Migration
             $table->timestamps();
             $table->dateTime('bought_at' , 0);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('product_name');
+            $table->foreignId('product_id')->constrained()->nullable();
             $table->integer('amount');
             $table->boolean('fullfilled')->default(false);
-            $table->decimal('price' , 10 , 2);
+            $table->decimal('price' , 20 , 2);
         });
     }
 

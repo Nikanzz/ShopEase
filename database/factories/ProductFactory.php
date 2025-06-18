@@ -22,9 +22,17 @@ class ProductFactory extends Factory
 
     public function definition(): array
     {
+        $sid = Seller::inRandomOrder()->first()?->id;
+        while($sid == 1){
+            $sid = Seller::inRandomOrder()->first()?->id;
+        }
+        $cid = Category::inRandomOrder()->first()?->id;
+        while($cid == 1){
+            $cid = Category::inRandomOrder()->first()?->id;
+        }
         return [
-            'seller_id' => Seller::inRandomOrder()->first()?->id ?? Seller::factory()->create()->id, 
-            'category_id' => Category::inRandomOrder()->first()?->id ?? Category::factory()->create()->id,
+            'seller_id' => $sid ?? Seller::factory()->create()->id, 
+            'category_id' => $cid ?? Category::factory()->create()->id,
             'name' => $this->faker->words(3, true), 
             'description' => $this->faker->paragraph(),
             'price' => $this->faker->randomFloat(2, 10000, 1000000),

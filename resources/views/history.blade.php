@@ -29,7 +29,7 @@
                 <div class="flex justify-between bg-white rounded-lg shadow-md p-4">
                     <div>
                       <h3 class="font-semibold text-lg text-gray-800 mb-2">
-                          Produk: {{ $purchase->item}}
+                          Produk: {{ $purchase->item->name}}
                       </h3>
                       <p class="text-gray-600 text-sm mb-3">
                           Date: {{ $purchase->bought_at }}

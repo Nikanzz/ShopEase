@@ -84,7 +84,6 @@ class ProductController extends Controller
             'category_id' => 'required'
         ]);
         $query =DB::table('products')->where('id' , $request['id']);
-        DB::table('histories')->where('product_name' , $query->firstorFail()->name)->update(['product_name' => $validated['name']]);
         $product = $query->update($validated);
         return view('product-list')->with('products' , ProductController::getProducts($request));
     }
@@ -93,6 +92,7 @@ class ProductController extends Controller
         $sellerId = DB::table('sellers')->where('user_id' , Auth::user()->id)->firstorfail()->id;
         $product = DB::table('products')->where('id' , $product_id);
         if($sellerId == $product->firstorfail()->seller_id){
+            DB::table('histories')->where('product_id' , $product_id)->update(['product_id' => 1]);
             $product->delete();
             return redirect('/products')->with('products' , ProductController::getProducts($request));
         } else {
