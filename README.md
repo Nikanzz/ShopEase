@@ -47,6 +47,13 @@ cp .env.example .env
 php artisan key:generate
 ```
 
+### 5. Create Storage Link
+
+```bash
+# Create a symbolic link for public file access (especially for profile picture update)
+php artisan storage:link
+```
+
 ### 5. Database Setup (Run migration)
 
 ```bash
