@@ -8,12 +8,18 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-    <div class="flex p-4 justify-between items-center bg-gray-100">
+    <div class="flex p-4 justify-between items-center bg-gray-100 px-10 py-5">
         <h1 class="text-2xl font-bold mb-4">Purchase History</h1>
-        <a href="{{ route('dashboard') }}" class="text-blue-500 hover:underline mb-4 inline-block">Back to Dashboard</a>
+        <form method="GET" action="{{ route('dashboard') }}" class="inline-block">
+            @csrf
+            <button type="submit" class="bg-blue-100 hover:bg-blue-200 cursor-pointer text-gray-700 px-6 py-3 rounded-lg flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Back to Dashboard
+            </button>
+        </form>
     </div>
     @if (count($history) == 0)
-        <div class="bg-white rounded-lg shadow-md p-4">
+        <div class="bg-white rounded-lg shadow-md flex justify-center">
             <h3 class="font-semibold text-lg text-gray-800 mb-2">No purchase history available</h3>
             <p class="text-gray-600 text-sm mb-3">You haven't made any purchases yet.</p>
         </div>
@@ -54,7 +60,7 @@
                             
                             <div class="mb-2">
                                 <label for="rating-{{$purchase->id}}">Rating:</label>
-                                <select name="rating" id="rating-{{$purchase->id}}" required class="w-full border p-1 rounded">
+                                <select name="rating" id="rating-{{$purchase->id}}" required class="w-full border p-1 rounded cursor-pointer">
                                     <option value="">Pilih Rating</option>
                                     <option value="5">⭐⭐⭐⭐⭐</option>
                                     <option value="4">⭐⭐⭐⭐</option>
@@ -67,61 +73,12 @@
                                 <label for="comment-{{$purchase->id}}">Komentar:</label>
                                 <textarea name="comment" id="comment-{{$purchase->id}}" rows="3" placeholder="Tulis ulasan Anda..." class="w-full border p-1 rounded"></textarea>
                             </div>
-                            <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">Kirim Ulasan</button>
+                            <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 cursor-pointer">Kirim Ulasan</button>
                         </form>
                     @endif
                 </div>
             @endforeach
         </div>
     @endif                 
-    <h1>Your Purchase History</h1>
-    <ul>
-        <li>Name: {{ Auth::user()->name }}</li>
-        <li>Email: {{ Auth::user()->email }}</li>
-    </ul>
-    <form method="GET" action="{{ route('dashboard') }}">
-        @csrf
-        <button type="submit">Back to dashboard</button><br><br>
-    </form>
-<table border="1" cellpadding="5" cellspacing="0"> 
-  <thead> 
-    <tr> 
-      <th style="width: 50px">Tanggal</th> 
-      <th style="width: 300px">Produk</th> 
-      <th style="width: 120px">Jumlah</th>
-      <th style="width: 120px">Harga</th>
-      <th style="width: 120px">Total</th>
-      <th style="width: 120px">Recieved</th>
-    </tr> 
-  </thead> 
-  <tbody> 
-    @foreach($history as $row) 
-      <tr> 
-        <td> 
-           {{$row->bought_at}} 
-        </td> 
-        <td> 
-          {{$row->item}}
-        </td>
-        <td> 
-          {{$row->amount}}
-        </td> 
-        <td> 
-          {{$row->price}}
-        </td>
-        <td> 
-          {{$row->price*$row->amount}}
-        </td>
-        <td> 
-          @if($row->fullfilled)
-          Yes
-          @else
-          No
-          @endif
-        </td>
-      </tr> 
-    @endforeach 
-  </tbody> 
-</table> 
 </body>
 </html>
