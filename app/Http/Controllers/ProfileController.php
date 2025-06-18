@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -59,10 +62,25 @@ class ProfileController extends Controller
         return redirect()->route('profile')->with('success', 'Profile updated successfully.');
     }
 
-    public function deleteProfile()
+    public function deleteProfile(Request $request)
     {
-        $user = auth()->user();
+        $user = Auth::user();
+        $seller = DB::table('sellers')->where('user_id' , $user->id);
+        if($seller->exists()){
+            $sid = $seller->first()->id;
+            $products = DB::table('products')->where('seller_id' , $sid);
+            $arrP = $products->get()->toArray();
+            foreach ($arrP as $p){
+                DB::table('histories')->where('product_id' , $p->id)->update(['product_id' => 1]);
+                DB::table('products')->where('id' , $p->id)->delete();
+            }
+            $seller->delete();
+        }
+
+        DB::table('histories')->where('user_id' , $user->id)->update(['user_id' => 1]);
+        $request->session()->invalidate();
         $user->delete();
+        Log::info('Deleted');
 
         return redirect('/login')->with('success', 'Profile deleted successfully.');
     }
