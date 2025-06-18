@@ -54,7 +54,7 @@ php artisan key:generate
 php artisan storage:link
 ```
 
-### 5. Database Setup (Run migration)
+### 6. Database Setup (Run migration)
 
 ```bash
 # Run database migrations
@@ -64,7 +64,7 @@ php artisan migrate
 php artisan db:seed
 ```
 
-### 6. Run the Application
+### 7. Run the Application
 
 ```bash
 npm run build
