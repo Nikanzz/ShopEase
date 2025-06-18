@@ -119,7 +119,7 @@
                 </form>
             </div>
         @else
-            <div class="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-8 text-white">
+            <div class="bg-gradient-to-r from-green-500 to-green-600 p-8 text-white">
                 <div class="text-center">
                     <i class="fas fa-store text-4xl mb-4"></i>
                     <h3 class="text-2xl font-bold mb-2">Start Selling Today!</h3>
