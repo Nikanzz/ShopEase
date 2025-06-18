@@ -10,9 +10,9 @@ class DashboardController extends Controller
 {
     public function index()
     {   
-        $categories = Category::all();
+        $products = Product::latest()->take(11)->get()->slice(0,10);
+        $categories = Category::all()->slice(1);
 
-        $products = Product::latest()->take(10)->get();
 
         return view('dashboard', compact('products', 'categories'));
     }

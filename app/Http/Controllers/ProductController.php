@@ -84,15 +84,16 @@ class ProductController extends Controller
             'category_id' => 'required'
         ]);
         $query =DB::table('products')->where('id' , $request['id']);
-        DB::table('histories')->where('product_name' , $query->firstorFail()->name)->update(['product_name' => $validated['name']]);
         $product = $query->update($validated);
         return view('product-list')->with('products' , ProductController::getProducts($request));
     }
 
     public function deleteProduct(Request $request , int $product_id){
+        if($product_id == 1)  return redirect('/');
         $sellerId = DB::table('sellers')->where('user_id' , Auth::user()->id)->firstorfail()->id;
         $product = DB::table('products')->where('id' , $product_id);
         if($sellerId == $product->firstorfail()->seller_id){
+            DB::table('histories')->where('product_id' , $product_id)->update(['product_id' => 1]);
             $product->delete();
             return redirect('/products')->with('products' , ProductController::getProducts($request));
         } else {
@@ -107,6 +108,7 @@ class ProductController extends Controller
         $query = $validated['query'];
 
         $products = Product::where('name', 'LIKE', "%{$query}%")
+            ->where('id', "!=" , '1')
             ->orWhere('description', 'LIKE', "%{$query}%")
             ->paginate(12);
 

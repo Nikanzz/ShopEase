@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/becomeseller' , [SellerController::class , 'becomeSeller'])->name('become.seller');
     Route::post('/sellerregister' , [SellerController::class , 'createNewSeller'])->name('register.seller');
     Route::get('/orders' , [SellerController::class , 'showOrders'])->name('orders.seller');
+    Route::get('/send/{id}' , [SellerController::class , 'sendOrder'])->name('send.order');
     
     Route::get('/history' , [HistoryController::class , 'showPurchaseHistory'])->name('purchase.history');
     Route::get('/topup', [ProfileController::class, 'showTopup'])->name('topup');

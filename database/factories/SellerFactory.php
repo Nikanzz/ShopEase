@@ -21,8 +21,12 @@ class SellerFactory extends Factory
     
     public function definition(): array
     {
+        $id = User::inRandomOrder()->first()->id;
+        while($id == 1){
+            $id = User::inRandomOrder()->first()->id;
+        }
         return [
-            'user_id' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
+            'user_id' => $id ?? User::factory()->create()->id,
             'shopname' => fake()->unique()->company(),
         ];
     }

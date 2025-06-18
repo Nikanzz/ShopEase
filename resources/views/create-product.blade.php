@@ -14,9 +14,9 @@
         <label for="description">Description</label>
         <textarea id="description" name="description"></textarea><br><br>
         <label for="price">Price</label>
-        <input type="number" id="price" name="price"><br><br>
+        <input type="number" id="price" name="price" min="0" max="500000000"><br><br>
         <label for="stock">Stock</label>
-        <input type="number" id="stock" name="stock"><br><br>
+        <input type="number" id="stock" name="stock" min="0" max="500000000"><br><br>
         <label for="categories">Category</label>
         <select name="categories" id="categories">
             @foreach(DB::table('categories')->get() as $category)

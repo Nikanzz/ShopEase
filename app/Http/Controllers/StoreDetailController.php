@@ -19,6 +19,7 @@ class StoreDetailController extends Controller
     public function showStoreDetail(Seller $seller){
 
         $id = $seller->id;
+        if($id == 1) return redirect('/');
         
         $products = Product::where('seller_id', $id)
                            ->get();

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('birth_date')->nullable();
             $table->enum('gender', ['male', 'female', 'other'])->nullable();
             $table->string('profile_picture')->nullable();
-            $table->decimal('balance', 10, 2)->default(0);
+            $table->decimal('balance', 20, 2)->default(0);
             $table->string('email')->unique();
             $table->string('address')->nullable();
             $table->timestamp('email_verified_at')->nullable();
