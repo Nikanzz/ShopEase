@@ -19,6 +19,7 @@ class ProductByCategoryController extends Controller
     public function showProductByCategory(Request $request, Category $category){
         Log::info($category);
         $ids = $category->id;
+        if($category->id == 1) return redirect('/');
 
         
         $id = Auth::user()->id;

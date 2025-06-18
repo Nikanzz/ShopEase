@@ -89,6 +89,7 @@ class ProductController extends Controller
     }
 
     public function deleteProduct(Request $request , int $product_id){
+        if($product_id == 1)  return redirect('/');
         $sellerId = DB::table('sellers')->where('user_id' , Auth::user()->id)->firstorfail()->id;
         $product = DB::table('products')->where('id' , $product_id);
         if($sellerId == $product->firstorfail()->seller_id){
@@ -107,6 +108,7 @@ class ProductController extends Controller
         $query = $validated['query'];
 
         $products = Product::where('name', 'LIKE', "%{$query}%")
+            ->where('id', "!=" , '1')
             ->orWhere('description', 'LIKE', "%{$query}%")
             ->paginate(12);
 
