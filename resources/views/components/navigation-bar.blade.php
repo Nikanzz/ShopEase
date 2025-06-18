@@ -2,8 +2,10 @@
     <div class="container mx-auto px-4">
         <div class="flex items-center justify-between py-5">
             <div class="flex items-center space-x-4">
-                <div class="bg-orange-500 text-white font-bold text-xl px-3 py-2 rounded">
-                    <a href="{{ route('dashboard') }}">ShopEase</a>
+                <div class="bg-orange-500 rounded">
+                    <a href="{{ route('dashboard') }}">
+                        <img src=" {{ asset('images/logo.png') }} " alt="Logo" class="w-20 h-20 object-cover">
+                    </a>
                 </div>
             </div>
 
@@ -18,7 +20,7 @@
                             class="flex-1 px-4 py-3 border-2 border-orange-500 rounded-l-md focus:outline-none focus:border-orange-600">
                         <button 
                             type="submit" 
-                            class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-r-md transition duration-200">
+                            class="cursor-pointer bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-r-md transition duration-200">
                             <i data-lucide='search'></i>
                         </button>
                     </div>
@@ -28,7 +30,7 @@
              <div>          
                 @auth
                     <div class="relative group">
-                        <button class="flex items-center space-x-2 text-gray-700 hover:text-orange-500 focus:outline-none">
+                        <button class="flex items-center space-x-2 text-gray-700 hover:text-orange-500 focus:outline-none cursor-pointer">
                             <img src="{{ auth()->user()->profile_picture_url }}" class="w-10 h-10 rounded-full">
                             <span class="hidden md:block">{{ Auth::user()->name }}</span>
                             <i class="w-4 h-4"></i>
@@ -51,7 +53,7 @@
                                 <hr class="my-1">
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button type="submit" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <button type="submit" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
                                         <i data-lucide="log-out" class="w-4 h-4 inline mr-2"></i>Logout
                                     </button>
                                 </form>
