@@ -24,8 +24,18 @@ class PurchaseController extends Controller
     }
 
     public function addToCart(Request $request){
+        $request->validate([
+            'pid' => 'required|integer|exists:products,id',
+            'quantity' => 'required|integer'
+        ]);
+
         $productId = (int)($request->pid);
         $amount = (int)($request->quantity);
+        $cart = $request->session()->get('cart');
+
+        if ($amount <= 0) {
+            return redirect()->back()->with('error', 'The amount of product must be 1 or more');
+        }
 
         $request->session()->push('cart' , ['productId'=>$productId , 'amount'=>$amount]);
         $categoryid = $request->session()->get('categoryid');
@@ -82,7 +92,6 @@ class PurchaseController extends Controller
                 'amount' => $item['amount'],
                 'fullfilled' => false,
                 'price' => $product->price,
-                'product_id' => $product->id,
             ]);
         }
 
