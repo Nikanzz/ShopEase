@@ -47,9 +47,6 @@
                                 <a href="{{ route('purchase.history') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     <i data-lucide="history" class="w-4 h-4 inline mr-2"></i>My History
                                 </a>
-                                <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                    <i data-lucide="star" class="w-4 h-4 inline mr-2"></i>My Reviews
-                                </a>
                                 <hr class="my-1">
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
