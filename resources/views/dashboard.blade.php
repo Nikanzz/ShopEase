@@ -27,12 +27,12 @@
     <hr class="my-8">
   
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-2xl font-bold mb-6">Recommended</h1>
+        <h1 class="text-2xl font-bold mb-6">Latest</h1>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($products as $product)
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-200 flex flex-col gap-10">
-                    <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                    <div class="w-full aspect-square bg-gray-200 flex items-center justify-center">
                         <span class="text-gray-500"><img src="https://img.freepik.com/premium-vector/supermarket-products-cartoon_24640-55629.jpg" alt="{{ $product->name }}" class="w-full h-full object-cover"></span>
                     </div>
 
