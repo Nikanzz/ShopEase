@@ -26,7 +26,7 @@
                 id="quantity" 
                 name="quantity" 
                 value="0" 
-                min="0" 
+                min="1" 
                 max="{{ $product->stock }}" 
                 oninput="updateTotal()" 
                 class="bg-gray-100 rounded px-4 hover:bg-gray-200"

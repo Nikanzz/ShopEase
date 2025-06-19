@@ -14,7 +14,7 @@ Stok tersedia: {{ $product->stock }}<br><br>
         id="quantity" 
         name="quantity" 
         value="0" 
-        min="0" 
+        min="1" 
         max="{{ $product->stock }}" 
         oninput="updateTotal()" 
         required
