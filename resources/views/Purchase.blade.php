@@ -36,6 +36,12 @@
             Total harga: 
             <span id="total">Rp0</span><br><br>
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-200 cursor-pointer">Masukkan</button>
+            @if (session('error'))
+                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4" role="alert">
+                    <strong class="font-bold">Error!</strong>
+                    <span class="block sm:inline">{{ session('error') }}</span>
+                </div>
+            @endif
         </form>
         <br>
         <button type="button" onclick="history.back();" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-200 cursor-pointer">Kembali</button>
